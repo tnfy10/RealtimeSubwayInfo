@@ -5,6 +5,9 @@ plugins {
     id 'com.google.dagger.hilt.android'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     namespace 'xyz.myeoru.realtimesubwayinfo'
     compileSdk 33
@@ -20,6 +23,8 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        buildConfigField "String", "SEOUL_REALTIME_SUBWAY_ARRIVAL_API_KEY", properties["SEOUL_REALTIME_SUBWAY_ARRIVAL_API_KEY"]
     }
 
     buildTypes {
@@ -29,11 +34,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     buildFeatures {
         compose true
@@ -66,10 +71,27 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.1"
+
     // hilt
-    implementation "com.google.dagger:hilt-android:2.44"
+    def hiltVersion = "2.44"
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$hiltVersion"
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
-    kapt "com.google.dagger:hilt-compiler:2.44"
+
+    // retrofit2
+    def retrofitVersion = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // okHttp3
+    def okHttpVersion = "4.10.0"
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+    // logger
+    implementation "com.orhanobut:logger:2.2.0"
 }
 
 kapt {

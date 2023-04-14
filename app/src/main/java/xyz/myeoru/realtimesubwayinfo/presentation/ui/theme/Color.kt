@@ -1,4 +1,4 @@
-package xyz.myeoru.realtimesubwayinfo.ui.theme
+package xyz.myeoru.realtimesubwayinfo.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
