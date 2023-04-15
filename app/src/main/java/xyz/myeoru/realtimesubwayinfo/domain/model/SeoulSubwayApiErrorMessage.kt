@@ -1,10 +1,8 @@
 package xyz.myeoru.realtimesubwayinfo.domain.model
 
-data class SeoulSubwayApiErrorMessage(
-    val code: String,
-    val developerMessage: String,
-    val link: String,
-    val message: String,
+data class SeoulSubwayOpenApiMessage(
     val status: Int,
+    val code: String,
+    val message: String,
     val total: Int
 )
