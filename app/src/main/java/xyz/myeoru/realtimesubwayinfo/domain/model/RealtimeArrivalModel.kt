@@ -1,17 +1,8 @@
 package xyz.myeoru.realtimesubwayinfo.domain.model
 
 data class RealtimeArrivalModel(
-    val errorMessage: ErrorMessage,
+    val errorMessage: SeoulSubwayApiErrorMessage,
     val realtimeArrivalList: List<RealtimeArrival>
-)
-
-data class ErrorMessage(
-    val code: String,
-    val developerMessage: String,
-    val link: String,
-    val message: String,
-    val status: Int,
-    val total: Int
 )
 
 data class RealtimeArrival(

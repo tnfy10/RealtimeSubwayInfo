@@ -19,7 +19,7 @@ class MainViewModel @Inject constructor(private val seoulOpenApiRepository: Seou
 
     suspend fun fetchRealtimeStationArrivalInfo(stationName: String) {
         _state.value = RealtimeSubwayArrivalState.Loading
-        seoulOpenApiRepository.getRealtimeStationArrivalInfo(0, 5, stationName).catch {
+        seoulOpenApiRepository.getRealtimeStationArrivalInfo(stationName = stationName).catch {
             _state.value = RealtimeSubwayArrivalState.Error(it)
         }.conflate().collect {
             _state.value = RealtimeSubwayArrivalState.Success(it)
